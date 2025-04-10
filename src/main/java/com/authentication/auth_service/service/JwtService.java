@@ -28,12 +28,10 @@ public class JwtService {
                 .add(claims)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 *30))
+                .expiration(new Date(System.currentTimeMillis() + 60 * 1 *1000))
                 .and()
                 .signWith(getKey())
                 .compact();
-        System.out.println("Soy generateToken: " + jwts);
-
         return jwts;
     }
 
@@ -66,6 +64,7 @@ public class JwtService {
     }
 
     private boolean isTokenExpired(String token) {
+
         return extractExpiration(token).before(new Date());
     }
 
